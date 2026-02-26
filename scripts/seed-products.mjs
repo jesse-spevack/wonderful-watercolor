@@ -7,32 +7,32 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 const products = [
   {
-    name: 'Sunset Garden',
-    description: 'A vibrant watercolor of a garden bathed in sunset light. Original painting on watercolor paper.',
+    name: 'Birds in Sky',
+    description: 'Colorful birds soaring through a soft, open sky. Original watercolor painting.',
     price: 2500,
     metadata: { type: 'painting' },
   },
   {
-    name: 'Ocean Waves',
-    description: 'Gentle ocean waves captured in soft blues and greens. Original painting on watercolor paper.',
+    name: 'Mountainous Horizon',
+    description: 'A sweeping mountain landscape stretching toward a distant horizon. Original watercolor painting.',
     price: 3000,
     metadata: { type: 'painting' },
   },
   {
-    name: 'Rainbow Flowers',
-    description: 'A cheerful bouquet of rainbow-colored flowers. Original painting on watercolor paper.',
+    name: 'Sun Flower',
+    description: 'A bright sunflower with vivid green stems reaching toward the light. Original watercolor painting.',
     price: 2000,
     metadata: { type: 'painting' },
   },
   {
-    name: 'Starry Night Sky',
-    description: 'A dreamy night sky filled with stars and swirling colors. Original painting on watercolor paper.',
+    name: 'House on Hill',
+    description: 'A cozy house perched on a hill beneath a starlit night sky. Original watercolor painting.',
     price: 3500,
     metadata: { type: 'painting' },
   },
   {
-    name: 'Forest Friends',
-    description: 'Woodland animals playing among the trees. Original painting on watercolor paper.',
+    name: 'Helping Hand',
+    description: 'A realistic portrait of a young girl\'s hand, painted with care and detail. Original watercolor painting.',
     price: 2800,
     metadata: { type: 'painting' },
   },

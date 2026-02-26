@@ -5,11 +5,11 @@ import { stripe } from './stripe'
 import type Stripe from 'stripe'
 
 const LOCAL_IMAGES: Record<string, string> = {
-  'Sunset Garden': '/paintings/sunset-garden.jpg',
-  'Ocean Waves': '/paintings/ocean-waves.jpg',
-  'Rainbow Flowers': '/paintings/rainbow-flowers.jpg',
-  'Starry Night Sky': '/paintings/starry-night-sky.jpg',
-  'Forest Friends': '/paintings/forest-friends.jpg',
+  'Birds in Sky': '/paintings/birds-in-sky.jpg',
+  'Mountainous Horizon': '/paintings/mountainous-horizon.jpg',
+  'Sun Flower': '/paintings/sun-flower.jpg',
+  'House on Hill': '/paintings/house-on-hill.jpg',
+  'Helping Hand': '/paintings/helping-hand.jpg',
 }
 
 export interface Product {

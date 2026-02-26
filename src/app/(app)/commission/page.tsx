@@ -1,9 +1,10 @@
-// ABOUTME: Custom commission page explaining the commission offering.
-// ABOUTME: Fetches the commission product from Stripe and shows purchase button.
+// ABOUTME: Custom commission page with a two-column product detail layout.
+// ABOUTME: Includes a text area for describing the desired painting and add-to-cart.
 
-import { Heading } from '@/components/heading'
 import { getCommission } from '@/lib/products'
+import { CheckIcon } from '@heroicons/react/20/solid'
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { CommissionPurchaseButton } from './commission-purchase-button'
 
 export const dynamic = 'force-dynamic'
@@ -16,36 +17,109 @@ export default async function Commission() {
   const commission = await getCommission()
 
   return (
-    <>
-      <Heading>Custom Commission</Heading>
-      <div className="mt-6 max-w-2xl">
-        <p className="text-sm text-zinc-600">
-          Want a painting made just for you? Our young artist loves taking on custom projects! Tell us what you would
-          like — a favorite animal, a family portrait, a magical landscape — and we will create a one-of-a-kind
-          watercolor painting.
-        </p>
-        <div className="mt-6 rounded-lg border border-zinc-200 p-6">
-          <h3 className="text-lg font-semibold text-zinc-900">How it works</h3>
-          <ol className="mt-4 list-decimal space-y-2 pl-5 text-sm text-zinc-600">
-            <li>Purchase a commission below</li>
-            <li>We will reach out to discuss your painting idea</li>
-            <li>Your custom watercolor will be painted and shipped to you</li>
-          </ol>
-        </div>
-        {commission && (
-          <div className="mt-8">
-            <p className="text-2xl font-semibold text-zinc-900">{commission.price.formatted}</p>
-            <div className="mt-4">
-              <CommissionPurchaseButton
-                priceId={commission.price.id}
-                productId={commission.id}
-                name={commission.name}
-                price={commission.price.amount}
-              />
-            </div>
+    <div className="bg-white">
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+        {/* Commission details */}
+        <div className="lg:max-w-lg lg:self-end">
+          <nav aria-label="Breadcrumb">
+            <ol role="list" className="flex items-center space-x-2">
+              <li>
+                <div className="flex items-center text-sm">
+                  <Link href="/" className="font-medium text-gray-500 hover:text-gray-900">
+                    Home
+                  </Link>
+                  <svg
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    aria-hidden="true"
+                    className="ml-2 size-5 shrink-0 text-gray-300"
+                  >
+                    <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
+                  </svg>
+                </div>
+              </li>
+              <li>
+                <div className="flex items-center text-sm">
+                  <span className="font-medium text-gray-500">Custom Commission</span>
+                </div>
+              </li>
+            </ol>
+          </nav>
+
+          <div className="mt-4">
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Custom Commission</h1>
           </div>
-        )}
+
+          <section aria-labelledby="information-heading" className="mt-4">
+            <h2 id="information-heading" className="sr-only">
+              Commission information
+            </h2>
+
+            {commission && (
+              <p className="text-lg text-gray-900 sm:text-xl">{commission.price.formatted}</p>
+            )}
+
+            <div className="mt-4 space-y-6">
+              <p className="text-base text-gray-500">
+                Want a painting made just for you? Describe a scene &mdash; your favorite animal, a family
+                memory, a magical landscape &mdash; and Audrey will paint a one-of-a-kind watercolor just
+                for you.
+              </p>
+            </div>
+
+            <div className="mt-6 rounded-lg border border-gray-200 p-4">
+              <h3 className="text-sm font-medium text-gray-900">How it works</h3>
+              <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm text-gray-500">
+                <li>Describe your painting idea below</li>
+                <li>Add the commission to your cart and check out</li>
+                <li>Audrey will paint and ship your custom watercolor</li>
+              </ol>
+            </div>
+
+            <div className="mt-6 flex items-center">
+              <CheckIcon aria-hidden="true" className="size-5 shrink-0 text-green-500" />
+              <p className="ml-2 text-sm text-gray-500">Commissions typically ship within a few days</p>
+            </div>
+          </section>
+        </div>
+
+        {/* Image */}
+        <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
+          <img
+            alt="Audrey painting watercolors"
+            src="/paintings/artist.jpg"
+            className="aspect-square w-full rounded-lg object-cover"
+          />
+        </div>
+
+        {/* Commission form */}
+        <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
+          <div className="mb-6">
+            <label htmlFor="commission-description" className="block text-sm font-medium text-gray-700">
+              Describe your painting
+            </label>
+            <textarea
+              id="commission-description"
+              name="description"
+              rows={4}
+              placeholder="A sunset over the Rocky Mountains with a family of deer in the foreground..."
+              className="mt-2 block w-full rounded-md border border-gray-300 px-4 py-3 text-base text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 focus:outline-hidden"
+            />
+            <p className="mt-2 text-sm text-gray-500">
+              Be as descriptive as you like. Audrey will reach out if she has questions.
+            </p>
+          </div>
+
+          {commission && (
+            <CommissionPurchaseButton
+              priceId={commission.price.id}
+              productId={commission.id}
+              name={commission.name}
+              price={commission.price.amount}
+            />
+          )}
+        </div>
       </div>
-    </>
+    </div>
   )
 }
