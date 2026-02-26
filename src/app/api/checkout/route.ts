@@ -3,6 +3,7 @@
 
 import { stripe } from '@/lib/stripe'
 import { NextResponse } from 'next/server'
+import type Stripe from 'stripe'
 
 interface CheckoutItem {
   priceId: string
@@ -10,13 +11,16 @@ interface CheckoutItem {
 }
 
 export async function POST(request: Request) {
-  const { items } = (await request.json()) as { items: CheckoutItem[] }
+  const { items, description } = (await request.json()) as {
+    items: CheckoutItem[]
+    description?: string
+  }
 
   if (!items || items.length === 0) {
     return NextResponse.json({ error: 'No items provided' }, { status: 400 })
   }
 
-  const session = await stripe.checkout.sessions.create({
+  const sessionParams: Stripe.Checkout.SessionCreateParams = {
     mode: 'payment',
     line_items: items.map((item) => ({
       price: item.priceId,
@@ -24,7 +28,13 @@ export async function POST(request: Request) {
     })),
     success_url: `${request.headers.get('origin')}/success`,
     cancel_url: `${request.headers.get('origin')}/cart`,
-  })
+  }
+
+  if (description) {
+    sessionParams.metadata = { commission_description: description }
+  }
+
+  const session = await stripe.checkout.sessions.create(sessionParams)
 
   return NextResponse.json({ url: session.url })
 }

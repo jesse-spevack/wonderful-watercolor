@@ -5,7 +5,7 @@ import { getCommission } from '@/lib/products'
 import { CheckIcon } from '@heroicons/react/20/solid'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { CommissionPurchaseButton } from './commission-purchase-button'
+import { CommissionForm } from './commission-form'
 
 export const dynamic = 'force-dynamic'
 
@@ -94,24 +94,8 @@ export default async function Commission() {
 
         {/* Commission form */}
         <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
-          <div className="mb-6">
-            <label htmlFor="commission-description" className="block text-sm font-medium text-gray-700">
-              Describe your painting
-            </label>
-            <textarea
-              id="commission-description"
-              name="description"
-              rows={4}
-              placeholder="A sunset over the Rocky Mountains with a family of deer in the foreground..."
-              className="mt-2 block w-full rounded-md border border-gray-300 px-4 py-3 text-base text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 focus:outline-hidden"
-            />
-            <p className="mt-2 text-sm text-gray-500">
-              Be as descriptive as you like. Audrey will reach out if she has questions.
-            </p>
-          </div>
-
           {commission && (
-            <CommissionPurchaseButton
+            <CommissionForm
               priceId={commission.price.id}
               productId={commission.id}
               name={commission.name}

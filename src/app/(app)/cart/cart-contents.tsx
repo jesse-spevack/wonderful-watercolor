@@ -15,6 +15,7 @@ export function CartContents() {
   async function handleCheckout() {
     setLoading(true)
     try {
+      const commissionItem = items.find((item) => item.description)
       const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -23,6 +24,7 @@ export function CartContents() {
             priceId: item.priceId,
             quantity: item.quantity,
           })),
+          ...(commissionItem?.description && { description: commissionItem.description }),
         }),
       })
       const { url } = await response.json()
