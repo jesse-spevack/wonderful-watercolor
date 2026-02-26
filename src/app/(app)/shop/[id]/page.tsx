@@ -9,6 +9,8 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { AddToCartButton } from './add-to-cart-button'
 
+export const dynamic = 'force-dynamic'
+
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params
   const product = await getProduct(id)

@@ -6,6 +6,8 @@ import { Link } from '@/components/link'
 import { getPaintings } from '@/lib/products'
 import type { Metadata } from 'next'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Shop',
 }

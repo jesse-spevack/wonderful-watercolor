@@ -6,6 +6,8 @@ import { Heading, Subheading } from '@/components/heading'
 import { Link } from '@/components/link'
 import { getPaintings } from '@/lib/products'
 
+export const dynamic = 'force-dynamic'
+
 export default async function Home() {
   const paintings = await getPaintings()
 

@@ -6,6 +6,8 @@ import { getCommission } from '@/lib/products'
 import type { Metadata } from 'next'
 import { CommissionPurchaseButton } from './commission-purchase-button'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Custom Commission',
 }
