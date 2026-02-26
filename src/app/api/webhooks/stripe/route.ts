@@ -1,7 +1,7 @@
 // ABOUTME: Stripe webhook handler for processing checkout events.
 // ABOUTME: Verifies webhook signatures and logs checkout.session.completed details.
 
-import { stripe } from '@/lib/stripe'
+import { getStripe } from '@/lib/stripe'
 import { NextResponse } from 'next/server'
 
 export async function POST(request: Request) {
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
   let event
 
   try {
-    event = await stripe.webhooks.constructEventAsync(
+    event = await getStripe().webhooks.constructEventAsync(
       payload,
       sigHeader,
       process.env.STRIPE_WEBHOOK_SECRET!

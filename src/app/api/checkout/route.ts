@@ -1,7 +1,7 @@
 // ABOUTME: API route that creates a Stripe Checkout Session.
 // ABOUTME: Accepts cart line items and returns the Checkout Session URL.
 
-import { stripe } from '@/lib/stripe'
+import { getStripe } from '@/lib/stripe'
 import { NextResponse } from 'next/server'
 import type Stripe from 'stripe'
 
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     sessionParams.metadata = { commission_description: description }
   }
 
-  const session = await stripe.checkout.sessions.create(sessionParams)
+  const session = await getStripe().checkout.sessions.create(sessionParams)
 
   return NextResponse.json({ url: session.url })
 }

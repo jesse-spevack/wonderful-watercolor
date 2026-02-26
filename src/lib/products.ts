@@ -1,7 +1,7 @@
 // ABOUTME: Functions to fetch product catalog from Stripe.
 // ABOUTME: Stripe is the source of truth for all products and prices.
 
-import { stripe } from './stripe'
+import { getStripe } from './stripe'
 import type Stripe from 'stripe'
 
 const LOCAL_IMAGES: Record<string, string> = {
@@ -47,8 +47,8 @@ async function toProduct(product: Stripe.Product, prices: Stripe.Price[]): Promi
 
 export async function getPaintings(): Promise<Product[]> {
   const [productsResponse, pricesResponse] = await Promise.all([
-    stripe.products.list({ active: true, limit: 100 }),
-    stripe.prices.list({ active: true, limit: 100 }),
+    getStripe().products.list({ active: true, limit: 100 }),
+    getStripe().prices.list({ active: true, limit: 100 }),
   ])
 
   const products = await Promise.all(
@@ -62,8 +62,8 @@ export async function getPaintings(): Promise<Product[]> {
 
 export async function getCommission(): Promise<Product | null> {
   const [productsResponse, pricesResponse] = await Promise.all([
-    stripe.products.list({ active: true, limit: 100 }),
-    stripe.prices.list({ active: true, limit: 100 }),
+    getStripe().products.list({ active: true, limit: 100 }),
+    getStripe().prices.list({ active: true, limit: 100 }),
   ])
 
   const commission = productsResponse.data.find((p) => p.metadata.type === 'commission')
@@ -74,8 +74,8 @@ export async function getCommission(): Promise<Product | null> {
 
 export async function getProduct(id: string): Promise<Product | null> {
   const [product, pricesResponse] = await Promise.all([
-    stripe.products.retrieve(id),
-    stripe.prices.list({ product: id, active: true, limit: 1 }),
+    getStripe().products.retrieve(id),
+    getStripe().prices.list({ product: id, active: true, limit: 1 }),
   ])
 
   if (!product.active || pricesResponse.data.length === 0) return null

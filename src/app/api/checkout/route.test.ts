@@ -3,19 +3,16 @@
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-// Stub the Stripe secret key so the stripe client initializes
-vi.stubEnv('STRIPE_SECRET_KEY', 'sk_test_fake')
-
 // Mock the stripe module
 const mockCreate = vi.fn().mockResolvedValue({ url: 'https://checkout.stripe.com/test' })
 vi.mock('@/lib/stripe', () => ({
-  stripe: {
+  getStripe: () => ({
     checkout: {
       sessions: {
         create: mockCreate,
       },
     },
-  },
+  }),
 }))
 
 const { POST } = await import('./route')
