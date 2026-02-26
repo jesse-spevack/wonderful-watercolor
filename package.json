@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed": "node scripts/seed-products.mjs"
   },
   "dependencies": {
     "@esbuild/darwin-arm64": "^0.27.3",
