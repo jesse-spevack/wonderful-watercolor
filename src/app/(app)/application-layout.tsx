@@ -12,13 +12,15 @@ import {
   SidebarLabel,
   SidebarSection,
 } from '@/components/sidebar'
-import { HomeIcon, ShoppingBagIcon, PaintBrushIcon, ShoppingCartIcon } from '@heroicons/react/20/solid'
+import { HomeIcon, PaintBrushIcon, ShoppingBagIcon, ShoppingCartIcon } from '@heroicons/react/20/solid'
 import { usePathname } from 'next/navigation'
+import { CartProvider } from '@/lib/cart-context'
 
 export function ApplicationLayout({ children }: { children: React.ReactNode }) {
   let pathname = usePathname()
 
   return (
+    <CartProvider>
     <StackedLayout
       navbar={
         <Navbar>
@@ -66,5 +68,6 @@ export function ApplicationLayout({ children }: { children: React.ReactNode }) {
     >
       {children}
     </StackedLayout>
+    </CartProvider>
   )
 }
