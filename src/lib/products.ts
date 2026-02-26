@@ -4,6 +4,14 @@
 import { stripe } from './stripe'
 import type Stripe from 'stripe'
 
+const LOCAL_IMAGES: Record<string, string> = {
+  'Sunset Garden': '/paintings/sunset-garden.jpg',
+  'Ocean Waves': '/paintings/ocean-waves.jpg',
+  'Rainbow Flowers': '/paintings/rainbow-flowers.jpg',
+  'Starry Night Sky': '/paintings/starry-night-sky.jpg',
+  'Forest Friends': '/paintings/forest-friends.jpg',
+}
+
 export interface Product {
   id: string
   name: string
@@ -26,7 +34,7 @@ async function toProduct(product: Stripe.Product, prices: Stripe.Price[]): Promi
     id: product.id,
     name: product.name,
     description: product.description,
-    images: product.images,
+    images: product.images.length > 0 ? product.images : LOCAL_IMAGES[product.name] ? [LOCAL_IMAGES[product.name]] : [],
     price: {
       id: price.id,
       amount: price.unit_amount,

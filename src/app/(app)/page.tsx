@@ -15,17 +15,26 @@ export default async function Home() {
     <>
       {/* Hero */}
       <div className="relative overflow-hidden rounded-2xl bg-amber-50 p-8 sm:p-12">
-        <div className="max-w-xl">
-          <Heading>Wonderful Watercolor</Heading>
-          <p className="mt-4 text-lg text-zinc-600">
-            Handmade watercolor paintings by a young artist. Each piece is an original, painted with love and
-            imagination.
-          </p>
-          <div className="mt-6 flex gap-4">
-            <Button href="/shop">Shop Paintings</Button>
-            <Button href="/commission" outline>
-              Custom Commission
-            </Button>
+        <div className="flex flex-col items-center gap-8 sm:flex-row">
+          <div className="max-w-xl flex-1">
+            <Heading>Wonderful Watercolor</Heading>
+            <p className="mt-4 text-lg text-zinc-600">
+              Handmade watercolor paintings by a young artist. Each piece is an original, painted with love and
+              imagination.
+            </p>
+            <div className="mt-6 flex gap-4">
+              <Button href="/shop">Shop Paintings</Button>
+              <Button href="/commission" outline>
+                Custom Commission
+              </Button>
+            </div>
+          </div>
+          <div className="w-48 shrink-0 sm:w-56">
+            <img
+              src="/paintings/artist.jpg"
+              alt="The artist at work"
+              className="rounded-xl shadow-lg"
+            />
           </div>
         </div>
       </div>
